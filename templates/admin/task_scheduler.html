@@ -1,0 +1,89 @@
+<style>
+  table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+</style>
+
+
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+
+{% if current_user.is_authenticated %}
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+
+    <hr>
+  <ol class="breadcrumb">
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  </ol>
+</section>
+<section class="container">
+
+    <div class="col-md-6">
+        <h1>Schedule Here</h1>
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endwith %}
+            <form action="" method="post">
+                <input type="text" placeholder="Task Name" name="w" class="form-control"><br><br>
+                <input type="text" placeholder="Place" name="x" class="form-control"><br><br>
+                <input type="date" placeholder="Date" name="y" class="form-control"><br><br>
+                <input type="time" placeholder="Time" name="z" class="form-control"><br><br>
+                <input type="submit" value="Schedule" class="btn btn-outline-primary btn-block"><br><br>
+            </form>
+    </div>
+    <div class="col-md-6">
+        <h1>Schedules</h1>
+    </div>
+
+
+</section>
+             
+{% else %}
+
+  <section class="content" style="color: white">
+    <div class="col-sm-12">
+      <h1>Admin Dashboard</h1>
+      <p class="lead">
+        Authentication
+      </p>
+      
+      {% if not current_user.is_authenticated %}
+      <p>You can register as a regular user, or log in as a superuser with the following credentials: <br><br>
+
+        email: <b>admin</b> <br>
+        password: <b>admin</b> <br>
+        <br>
+        <p>
+          <a class="btn btn-primary" href="{{ url_for('security.login') }}">Login</a> <a class="btn btn-default" href="{{ url_for('security.register') }}">Register</a>
+        </p>
+        {% endif %}
+        <br>
+        <p>
+          <a class="btn btn-primary" href="/"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+        </p>
+      </div>
+    </section>
+
+
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br>
+  {% endif %}
+
+  {% endblock body %}

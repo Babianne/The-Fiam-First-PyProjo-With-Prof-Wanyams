@@ -1,0 +1,75 @@
+<style>
+  table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+</style>
+
+
+{% extends 'admin/my_master.html' %}
+{% block body %}
+{{ super() }}
+
+{% if current_user.is_authenticated %}
+
+<<div class="row x">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            {% with messages = get_flashed_messages() %}
+            {% for message in messages  %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            {%  endwith %}
+
+            <form action="" method="post">
+                <input type="text" placeholder="Enter Company Name" name="a" class="form-control"><br><br>
+                <input type="number" placeholder="Enter Amount" name="b" class="form-control"><br><br>
+                <input type="date" placeholder="Enter payment date" name="c" class="form-control"><br><br>
+                <input type="submit" value="Submit" class="btn btn-outline-primary btn-block"><br><br>
+                <a href="/view" class="btn btn-outline-success btn-block">View users</a>
+            </form>
+         </div>
+        <div class="col-md-4"></div>
+    </div>
+
+  <section class="content" style="color: white">
+    <div class="col-sm-12">
+      <h1>Admin Dashboard</h1>
+      <p class="lead">
+        Authentication
+      </p>
+
+      {% if not current_user.is_authenticated %}
+      <p>You can register as a regular user, or log in as a superuser with the following credentials: <br><br>
+
+        email: <b>admin</b> <br>
+        password: <b>admin</b> <br>
+        <br>
+        <p>
+          <a class="btn btn-primary" href="{{ url_for('security.login') }}">Login</a> <a class="btn btn-default" href="{{ url_for('security.register') }}">Register</a>
+        </p>
+        {% endif %}
+        <br>
+        <p>
+          <a class="btn btn-primary" href="/"><i class="glyphicon glyphicon-chevron-left"></i> Back</a>
+        </p>
+      </div>
+    </section>
+
+
+  <br><br><br><br><br><br><br><br><br>
+  <br><br><br><br><br><br><br><br><br><br>
+  {% endif %}
+
+  {% endblock body %}

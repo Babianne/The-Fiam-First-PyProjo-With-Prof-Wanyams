@@ -1,0 +1,39 @@
+<html lang="en">
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+    <script src="../static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    
+</head>
+<body>
+     {% with messages = get_flashed_messages() %}
+         {% for message in messages  %}
+             <p>{{ message }}</p>
+         {% endfor %}
+     {%  endwith %}
+     <a href="/" class="btn btn-outline-dark">Back</a>
+     <table class="table table-dark table-hover">
+         <tr>
+             <th>Company Name</th>
+             <th>Amount</th>
+             <th>Date</th>
+             <th>Delete</th>
+             <th>Update</th>
+         </tr>
+         {% for user in users  %}
+            <tr>
+                <td>{{ user.company }}</td>
+                <td>{{user.amount }}</td>
+                <td>{{ user.date }}</td>
+                <td><a href="/delete/{{ user.id }}" class="btn btn-danger">Delete</a></td>
+                <td><a href="/update/{{ user.id }}" class="btn btn-primary">Update</a></td>
+
+            </tr>
+         {% endfor %}
+
+     </table>
+
+</body>
+</html>
